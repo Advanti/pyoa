@@ -19,15 +19,15 @@ raw_requirements = parse_requirements(
 requirements = [str(x.req) for x in raw_requirements]
 
 setup(
-    name='pyoa',
-    packages=['pyoa'],
+    name='pyopenaristos',
+    packages=['pyopenaristos'],
     description='OA Python Client',
     long_description=long_description,
-    keywords='pyoa, oa',
+    keywords='pyopenaristos, oa',
     install_requires=requirements,
     version='1.0',
     author='Isaac Elbaz',
-    download_url='https://github.com/Advanti/pyoa/archive/1.0.tar.gz',
+    download_url='https://github.com/Advanti/pyopenaristos/archive/1.0.tar.gz',
     author_email='isaac.elbaz@advantisolutions.com',
     url='https://www.advantisolutions.com/'
 )
