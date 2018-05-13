@@ -1,0 +1,80 @@
+#!/usr/bin/env python
+
+import argparse
+from pyopenaristos.streaming import topology_launch, topology_consume, topology_kill
+from colorama import init, Fore, Back, Style
+
+init()
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='OA Client Interface')
+
+    parser.add_argument(
+        '--host',
+        help='OpenAristos host',
+        required=True
+    )
+
+    parser.add_argument(
+        '--topology',
+        help='Topology name',
+    )
+
+    parser.add_argument(
+        '--tx',
+        help='Topology tx',
+    )
+
+    parser.add_argument(
+        '--arg',
+        action='append',
+        help='Topology argument',
+    )
+
+    parser.add_argument(
+        '--consume',
+        action='store_true',
+        help='Consume for a topology'
+    )
+
+    parser.add_argument(
+        '--kill',
+        action='store_true',
+        help='Consume for a topology'
+    )
+
+    args = parser.parse_args()
+    if args.kill:
+        if not args.tx:
+            raise RuntimeError('you must specify `tx` when killing')
+
+        print('Submitting command `kill_topology` for tx `{0}` ...'.format(args.tx))
+        topology_kill(args.host, args.tx)
+
+        print(Fore.GREEN + 'Topology killed.')
+
+    elif args.topology:
+        print('Submitting command `launch_topology` for `{0}` ...'.format(args.topology))
+
+        res = topology_launch(args.host, args.topology, args.arg)
+        if not res:
+            raise RuntimeError('failed to submit command')
+
+        print(Fore.GREEN + 'Submitted command `launch_topology`, transaction `{0}`.'.format(res['tx']))
+        print(Style.RESET_ALL)
+
+    elif args.consume:
+        if not args.tx:
+            raise RuntimeError('you must specify `tx` when consuming')
+
+        print('Subscribing for results of topology associated with tx `{0}` ... '.format(args.tx))
+
+        first = True
+        for msg in topology_consume(args.host, args.tx):
+            if first:
+                print(Fore.GREEN + 'Subscription successful. Stream will follow ...')
+                print(Style.RESET_ALL)
+
+                first = False
+
+            print(msg)
