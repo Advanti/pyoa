@@ -43,6 +43,12 @@ if __name__ == '__main__':
         help='Consume for a topology'
     )
 
+    parser.add_argument(
+        '--knowledge',
+        help='knowledge type for consumption',
+        default='statistic'
+    )
+
     args = parser.parse_args()
     if args.kill:
         if not args.tx:
@@ -70,7 +76,7 @@ if __name__ == '__main__':
         print('Subscribing for results of topology associated with tx `{0}` ... '.format(args.tx))
 
         first = True
-        for msg in topology_consume(args.host, args.tx):
+        for msg in topology_consume(args.host, args.tx, args.knowledge):
             if first:
                 print(Fore.GREEN + 'Subscription successful. Stream will follow ...')
                 print(Style.RESET_ALL)
