@@ -25,7 +25,7 @@ setup(
     long_description=long_description,
     keywords='pyopenaristos, oa',
     install_requires=requirements,
-    version='1.1',
+    version='1.2',
     author='Isaac Elbaz',
     scripts=[
         'pyopenaristos/bin/oa'
