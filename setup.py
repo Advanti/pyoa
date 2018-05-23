@@ -25,12 +25,12 @@ setup(
     long_description=long_description,
     keywords='pyopenaristos, oa',
     install_requires=requirements,
-    version='1.2',
+    version='1.3',
     author='Isaac Elbaz',
     scripts=[
         'pyopenaristos/bin/oa'
     ],
-    download_url='https://github.com/Advanti/pyopenaristos/archive/1.1.tar.gz',
+    download_url='https://github.com/Advanti/pyopenaristos/archive/1.3.tar.gz',
     author_email='isaac.elbaz@advantisolutions.com',
     url='https://www.advantisolutions.com/'
 )

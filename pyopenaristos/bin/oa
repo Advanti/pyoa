@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
-from pyopenaristos.streaming import topology_launch, topology_consume, topology_kill
+from pyopenaristos.streaming import topology_launch, topology_consume_custom, topology_kill
 from colorama import init, Fore, Back, Style
 
 init()
@@ -76,7 +76,7 @@ if __name__ == '__main__':
         print('Subscribing for results of topology associated with tx `{0}` ... '.format(args.tx))
 
         first = True
-        for msg in topology_consume(args.host, args.tx, args.knowledge):
+        for msg in topology_consume_custom(args.host, args.tx, args.knowledge):
             if first:
                 print(Fore.GREEN + 'Subscription successful. Stream will follow ...')
                 print(Style.RESET_ALL)

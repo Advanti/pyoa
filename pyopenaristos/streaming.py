@@ -43,7 +43,15 @@ def topology_launch(server, name, arguments):
     }
 
 
-def topology_consume(server, tx, knowledge):
+def topology_consume(server, knowledge, topic='streaming.twitter'):
+    topic = topic + '.' + knowledge
+    consumer = kafka.KafkaConsumer(topic, bootstrap_servers=server)
+
+    for msg in consumer:
+        yield msg.value
+
+
+def topology_consume_custom(server, tx, knowledge):
     topic = 'oa.custom.{0}.{1}'.format(tx, knowledge)
 
     consumer = kafka.KafkaConsumer(topic, bootstrap_servers=server)
