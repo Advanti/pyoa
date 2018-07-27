@@ -9,5 +9,5 @@ pytz>=2017.2
 requests>=2.18.4
 six>=1.10.0
 urllib3>=1.22
-kafka-python==1.4.2
+kafka-python==1.4.3
 colorama==0.3.9
